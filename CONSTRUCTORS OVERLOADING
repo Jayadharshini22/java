@@ -1,0 +1,124 @@
+import java.io.*;
+import java.util.*;
+
+class Stack {
+    private int[] arr;
+    private int size;
+    private int top;
+
+    Stack() {
+        size = 5;
+        arr = new int[size];
+        top = -1;
+    }
+
+    Stack(int size) {
+        this.size = size;
+        arr = new int[size];
+        top = -1;
+    }
+
+    Stack(Stack s) {
+        this.size = s.size;
+        this.top = s.top;
+        arr = new int[size];
+        for (int i = 0; i <= top; i++) {
+            arr[i] = s.arr[i];
+        }
+    }
+
+    void push(int x) {
+        if (top == size - 1) {
+            System.out.println("Stack Overflow!");
+            return;
+        }
+        arr[++top] = x;
+        System.out.println(x + " pushed into the stack");
+    }
+
+    void pop() {
+        if (top == -1) {
+            System.out.println("Stack Underflow!"); // Fixed: Was "overflow"
+            return;
+        }
+        System.out.println(arr[top--] + " popped from stack");
+    }
+
+    void show() {
+        if (top == -1) {
+            System.out.println("Stack is empty");
+            return;
+        }
+        System.out.println("Stack elements:");
+        for (int i = top; i >= 0; i--) { 
+            System.out.println(arr[i]);
+        }
+    }
+
+    void search(int key) {
+        boolean found = false;
+        for (int i = 0; i <= top; i++) {
+            if (arr[i] == key) {
+                System.out.println("Element found at position " + (i + 1));
+                found = true;
+                break; // Exit loop once found
+            }
+        }
+        if (!found) {
+            System.out.println("Element not found");
+        }
+    }
+
+    void sort() {
+        if (top == -1) {
+            System.out.println("Stack is empty, cannot sort");
+            return;
+        }
+        Arrays.sort(arr, 0, top + 1);
+        System.out.println("Stack sorted successfully");
+    }
+}
+
+public class ex2stack {
+    public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.print("Enter stack size: ");
+        int size = s.nextInt();
+        
+        Stack s1 = new Stack(size);
+        int choice;
+        
+        do {
+            System.out.println("\n--- STACK MENU ---");
+            System.out.println("1. Push\n2. Pop\n3. Display\n4. Search\n5. Sort\n6. Exit");
+            System.out.print("Enter your choice: ");
+            choice = s.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter element to push: ");
+                    s1.push(s.nextInt());
+                    break;
+                case 2:
+                    s1.pop();
+                    break;
+                case 3:
+                    s1.show();
+                    break;
+                case 4:
+                    System.out.print("Enter element to search: ");
+                    s1.search(s.nextInt());
+                    break;
+                case 5:
+                    s1.sort();
+                    break;
+                case 6:
+                    System.out.println("Exiting Program...");
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        } while (choice != 6);
+        s.close();
+    }
+}
