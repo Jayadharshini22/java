@@ -1,0 +1,26 @@
+import java.util.Scanner;
+
+public class Solution {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.close();
+
+        if (n % 2 != 0) {
+            // Rule 1: n is odd
+            System.out.println("Weird");
+        } else {
+            // n is even, check ranges
+            if (n >= 2 && n <= 5) {
+                // Rule 2: even and 2-5
+                System.out.println("Not Weird");
+            } else if (n >= 6 && n <= 20) {
+                // Rule 3: even and 6-20
+                System.out.println("Weird");
+            } else if (n > 20) {
+                // Rule 4: even and > 20
+                System.out.println("Not Weird");
+            }
+        }
+    }
+}
